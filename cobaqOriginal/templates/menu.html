@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Menú Principal</title>
+</head>
+<body>
+    <h1>Menu Principal</h1>
+    <button onclick="location.href='/formulario'">Gestionar Justificantes</button>
+    <button onclick="location.href='/base_datos'">Mostrar Base de Datos</button>
+
+    <h2>Cargar Base de Datos</h2>
+    <form action="/cargar_archivo" method="POST" enctype="multipart/form-data">
+        <label for="archivo">Seleccione el archivo Excel:</label>
+        <input type="file" id="archivo" name="archivo" accept=".xlsx" required>
+        <button type="submit">Cargar</button>
+    </form>
+</body>
+</html>

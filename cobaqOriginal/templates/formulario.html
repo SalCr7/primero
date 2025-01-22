@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Justificante de Inasistencia</title>
+    <script>
+        function toggleOtrosMotivo(selectElement) {
+            const otrosMotivoField = document.getElementById('otros-motivo-container');
+            if (selectElement.value === 'OTROS') {
+                otrosMotivoField.style.display = 'block';
+            } else {
+                otrosMotivoField.style.display = 'none';
+                document.getElementById('motivo_otros').value = ''; // Limpiar el campo si no está visible
+            }
+        }
+        function toggleOtrosDocumento(selectElement) {
+            const otrosDocumentoField = document.getElementById('otros-documento-container');
+            if (selectElement.value === 'OTROS') {
+                otrosDocumentoField.style.display = 'block';
+            } else {
+                otrosDocumentoField.style.display = 'none';
+                document.getElementById('documento_otros').value = ''; // Limpiar el campo si no está visible
+            }
+        }
+
+    </script>
+    <style>
+        #otros-motivo-container,
+        #otros-documento-container {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Justificante de Inasistencia</h1>
+    
+    <!-- Formulario de búsqueda -->
+    <form action="/formulario" method="POST">
+        <label for="matricula">Matrícula:</label>
+        <input type="text" id="matricula" name="matricula" value="{{ matricula }}" required>
+        <button type="submit">Buscar</button>
+    </form>
+    
+    <!-- Mensaje de confirmación o de búsqueda -->
+    {% if mensaje %}
+        <p><strong>{{ mensaje }}</strong></p>
+    {% endif %}
+    
+    <!-- Mostrar los datos del estudiante encontrado -->
+    {% if estudiante %}
+        <h2>Datos del Estudiante</h2>
+        <p><strong>Nombre:</strong> {{ estudiante[1] }}</p>
+        <p><strong>Sexo:</strong> {{ estudiante[2] }}</p>
+        <p><strong>CURP:</strong> {{ estudiante[3] }}</p>
+        <p><strong>Domicilio:</strong> {{ estudiante[4] }}</p>
+        <p><strong>Colonia:</strong> {{ estudiante[5] }}</p>
+        <p><strong>Código Postal:</strong> {{ estudiante[6] }}</p>
+        <p><strong>Ciudad:</strong> {{ estudiante[7] }}</p>
+        <p><strong>Municipio:</strong> {{ estudiante[8] }}</p>
+        <p><strong>Teléfono Casa:</strong> {{ estudiante[9] }}</p>
+        <p><strong>Teléfono Celular:</strong> {{ estudiante[10] }}</p>
+        <p><strong>Email:</strong> {{ estudiante[11] }}</p>
+        
+        <!-- Formulario de Justificante -->
+        <h2>Justificante de Inasistencia</h2>
+        <form action="/justificante" method="POST">
+            <input type="hidden" name="matricula" value="{{ estudiante[0] }}">
+            
+            <label for="fecha_justificar">Fecha a Justificar:</label>
+            <input type="text" id="fecha_justificar" name="fecha_justificar" required><br>
+            
+            <label for="motivo">Motivo o Causa de la Inasistencia:</label>
+            <select id="motivo" name="motivo" onchange="toggleOtrosMotivo(this)" required>
+                <option value="ENFERMEDAD DEL ESTUDIANTE">Enfermedad del Estudiante</option>
+                <option value="CITA MÉDICA">Cita Médica</option>
+                <option value="ENFERMEDAD DE UN FAMILIAR">Enfermedad de un Familiar</option>
+                <option value="PRESENTAR SÍNTOMAS DE COVID">Presentar Síntomas de COVID</option>
+                <option value="POSITIVO COVID">Positivo COVID</option>
+                <option value="FALLECIMIENTO DE UN FAMILIAR">Fallecimiento de un Familiar</option>
+                <option value="REPRESENTACIÓN A NIVEL MUNICIPAL, ESTATAL O NACIONAL">Representación a Nivel Municipal, Estatal o Nacional</option>
+                <option value="CAMBIO DE GRUPO">Cambio de Grupo</option>
+                <option value="CAMBIO DE TURNO">Cambio de Turno</option>
+                <option value="TRÁMITE BECA">Trámite Beca</option>
+                <option value="OTROS">Otros</option>
+            </select><br>
+
+            <!-- Contenedor para el motivo "Otros" -->
+            <div id="otros-motivo-container">
+                <label for="motivo_otros">Especifique Otro Motivo:</label>
+                <input type="text" id="motivo_otros" name="motivo_otros"><br>
+            </div>
+
+            <label for="documentos">Seleccione el documento de evidencia</label>
+            <select id="documentos" name="documentos" onchange="toggleOtrosDocumento(this)" required>
+                <option value="Receta medica">RECETA MÉDICA (DEBE CONTENER DATOS DE CONTACTO DE LA INSTITUCIÓN O MÉDICO QUE LA EXPIDE, CONSIDERANDO TELÉFONO, DOMICILIO, CÉDULA PROFESIONAL Y SELLO)</option>
+                <option value="Diagnostico medico">DIAGNÓSTICO MÉDICO DEBE CONTENER DATOS DE CONTACTO DE LA INSTITUCIÓN O MÉDICO QUE LA EXPIDE, CONSIDERANDO TELÉFONO, DOMICILIO, CÉDULA PROFESIONAL Y SELLO</option>
+                <option value="Cita Medica">CITA MÉDICA (DEBE CONTENER DATOS DE CONTACTO DE LA INSTITUCIÓN O MÉDICO QUE LA EXPIDE, CONSIDERANDO TELÉFONO, DOMICILIO, CÉDULA PROFESIONAL Y SELLO)</option>
+                <option value="ALTA HOSPITALIZACIÓN">ALTA HOSPITALIZACIÓN (DEBE CONTENER DATOS DE CONTACTO DE LA INSTITUCIÓN O MÉDICO QUE LA EXPIDE, CONSIDERANDO TELÉFONO, DOMICILIO, CÉDULA PROFESIONAL Y SELLO)</option>
+                <option value="ACTA DE DEFUNCIÓN">ACTA DE DEFUNCIÓN</option>
+                <option value="CONSTANCIA">CONSTANCIA O COMPROBANTE DE PARTICIPACIÓN DEPORTIVA O ACADÉMICA COBAQ, MUNICIPAL, ESTATAL O NACIONAL DE INSTITUCIONES PÚBLICAS</option>
+                <option value="COMPROBANTE Cita">DOCUMENTO COMPROBANTE DE LA CITA O CONVOCATORIA ABIERTA ANTE LAS INSTANCIAS CORRESPONDIENTES DE BECAS MUNICIPALES, ESTATALES O FEDERALES (BIENESTAR BENITO JUÁREZ)</option>
+                <option value="Ninguno">NINGUNO (SÓLO POR CAMBIO DE GRUPO O TURNO)</option>
+                <option value="Inscripcion">SOLICITUD DE INSCRIPCIÓN (SEGUNDA ETAPA)</option>
+                <option value="OTROS">Otros</option>
+            </select><br>
+
+            <div id="otros-documento-container">
+                <label for="documento_otros">Especifique Otro Documento:</label>
+                <input type="text" id="documento_otros" name="documento_otros"><br>
+            </div>
+
+            <button type="submit">Generar Justificante</button>
+        </form>
+    {% endif %}
+</body>
+</html>
