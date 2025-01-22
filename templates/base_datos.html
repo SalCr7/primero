@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Base de Datos</title>
+</head>
+<body>
+    <h1>Base de Datos de Estudiantes</h1>
+    
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Matrícula</th>
+                <th>Nombre</th>
+                <th>Sexo</th>
+                <th>CURP</th>
+                <th>Domicilio</th>
+                <th>Colonia</th>
+                <th>Código Postal</th>
+                <th>Ciudad</th>
+                <th>Municipio</th>
+                <th>Tel. Casa</th>
+                <th>Tel. Celular</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for estudiante in estudiantes %}
+            <tr>
+                <td>{{ estudiante[0] }}</td>
+                <td>{{ estudiante[1] }}</td>
+                <td>{{ estudiante[2] }}</td>
+                <td>{{ estudiante[3] }}</td>
+                <td>{{ estudiante[4] }}</td>
+                <td>{{ estudiante[5] }}</td>
+                <td>{{ estudiante[6] }}</td>
+                <td>{{ estudiante[7] }}</td>
+                <td>{{ estudiante[8] }}</td>
+                <td>{{ estudiante[9] }}</td>
+                <td>{{ estudiante[10] }}</td>
+                <td>{{ estudiante[11] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>
