@@ -2,18 +2,28 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Menú Principal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COBAQ</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { width: 60%; margin: auto; padding: 20px; border: 1px solid #ccc; }
+        .button { display: block; margin: 10px; padding: 10px; background: #ddd; text-decoration: none; }
+    </style>
 </head>
 <body>
-    <h1>Menu Principal</h1>
-    <button onclick="location.href='/formulario'">Gestionar Justificantes</button>
-    <button onclick="location.href='/base_datos'">Mostrar Base de Datos</button>
-
-    <h2>Cargar Base de Datos</h2>
-    <form action="/cargar_archivo" method="POST" enctype="multipart/form-data">
-        <label for="archivo">Seleccione el archivo Excel:</label>
-        <input type="file" id="archivo" name="archivo" accept=".xlsx" required>
-        <button type="submit">Cargar</button>
-    </form>
+    <div class="container">
+        <h1>Colegio de Bachilleres del Estado de Querétaro</h1>
+        <p>Plantel No. 17 "Egipemino González"</p>
+        <p>Director: M en E. Juan Pablo Gómez Estrada</p>
+        <p>Teléfono 1: 442 2432099</p>
+        <p>Teléfono 2: 442 2431895</p>
+        <a href="{{url_for('formulario_docentes')}}" class="button">Reporte Docentes</a>
+        <a href="{{url_for('formulario')}}" class="button">Justificantes</a>
+        <a href="{{url_for('reportes')}}" class="button">Reporte de Conducta</a>
+        <a href="#" class="button">Información General por Alumno</a>
+        <a href="#" class="button">Pase de Salida</a>
+        <a href="#" class="button">Control de Inasistencias y Tareas</a>
+        <a href="{{url_for ('cargar_y_mostrar')}}" class="button">Mostrar y cargar base</a>
+    </div>
 </body>
 </html>

@@ -40,6 +40,10 @@
         <input type="text" id="matricula" name="matricula" value="{{ matricula }}" required>
         <button type="submit">Buscar</button>
     </form>
+    <br>
+    <a href="listar_justificantes">
+        <button> Justificantes anteriores </button>
+    </a>
     
     <!-- Mensaje de confirmación o de búsqueda -->
     {% if mensaje %}
@@ -60,7 +64,9 @@
         <p><strong>Teléfono Casa:</strong> {{ estudiante[9] }}</p>
         <p><strong>Teléfono Celular:</strong> {{ estudiante[10] }}</p>
         <p><strong>Email:</strong> {{ estudiante[11] }}</p>
-        
+        <p><strong>Grupo:</strong> {{ estudiante[12] }}</p>
+        <p><strong>Nombre del padre:</strong> {{ estudiante[13] }}</p>
+        <p><strong>Nombre de la madre:</strong> {{ estudiante[14] }}</p>
         <!-- Formulario de Justificante -->
         <h2>Justificante de Inasistencia</h2>
         <form action="/justificante" method="POST">

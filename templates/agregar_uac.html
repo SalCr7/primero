@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agregar UAC</title>
+</head>
+<body>
+    <h1>Agregar UAC</h1>
+
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <ul>
+        {% for message in messages %}
+          <li>{{ message }}</li>
+        {% endfor %}
+        </ul>
+      {% endif %}
+    {% endwith %}
+
+    <form method="POST">
+        <label>Clave:</label><br>
+        <input type="text" name="clave" required><br>
+
+        <label>Asignatura:</label><br>
+        <input type="text" name="asignatura" required><br>
+
+        <label>HSM:</label><br>
+        <input type="number" step="0.1" name="hsm"><br>
+
+        <label>Semestre:</label><br>
+        <input type="number" name="semestre"><br>
+
+        <label>Componente:</label><br>
+        <input type="text" name="componente"><br>
+
+        <label>Capacitación:</label><br>
+        <input type="text" name="capacitacion"><br>
+
+        <label>Plan de Estudios:</label><br>
+        <input type="text" name="plan_estudios"><br>
+
+        <label>HSM paraesc:</label><br>
+        <input type="number" step="0.1" name="hsm_paraesc"><br><br>
+
+        <button type="submit">Agregar UAC</button>
+    </form>
+</body>
+</html>

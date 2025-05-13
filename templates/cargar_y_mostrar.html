@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Cargar y Mostrar Base de Datos</title>
+</head>
+<body>
+    <h1>Cargar y Mostrar Base de Datos</h1>
+
+    <h2>Opciones</h2>
+    
+    <h4>Cargar Archivo Excel</h4>
+    <form action="/cargar_archivo" method="POST" enctype="multipart/form-data">
+        <label for="archivo">Seleccione el archivo Excel:</label>
+        <input type="file" id="archivo" name="archivo" accept=".xls, .xlsx" required>
+        <button type="submit">Cargar</button>
+    </form>
+    <h4>Mostrar base de datos</h4>
+    <button onclick="location.href='/base_datos'">Mostrar Base de Datos</button>
+    <br>
+    <br>
+    <button onclick="location.href='/'">Regresar</button>
+
+</body>
+</html>

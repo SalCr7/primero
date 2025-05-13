@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Reporte Docente</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f8f8f8;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 40px;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .header img {
+            width: 80px;
+            height: auto;
+        }
+
+        .header h1 {
+            font-size: 18px;
+            margin: 10px 0 5px;
+        }
+
+        .header h2 {
+            font-size: 20px;
+            margin: 5px 0;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .info-section p {
+            margin: 5px 0;
+        }
+
+        .observaciones {
+            margin: 20px 0;
+        }
+
+        .justificado {
+            text-align: justify;
+            line-height: 1.6;
+        }
+
+        .firma {
+            margin-top: 40px;
+            text-align: left;
+        }
+
+        .firma strong {
+            display: block;
+            margin-bottom: 3px;
+        }
+
+        button {
+            margin-top: 40px;
+            padding: 10px 20px;
+            font-size: 16px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <img src="{{ url_for('static', filename='imag_cobaq.png') }}" alt="Logo COBAQ">
+        <h1>PLANTEL NO. 17 "CONSTITUCIÓN DE 1917"</h1>
+        <h2>REPORTE DOCENTE</h2>
+    </div>
+
+    <div class="info-grid">
+        <div class="info-section">
+            <p><strong>Estudiante:</strong> {{ estudiante }}</p>
+            <p><strong>Matrícula:</strong> {{ matricula }}</p>
+            <p><strong>Docente:</strong> {{ nombre_docente }}</p>
+            <p><strong>Asignatura:</strong> {{ asignatura }}</p>
+            <p><strong>Cantidad de reportes:</strong> {{ reportes_cantidad }}</p> <!-- NUEVO -->
+        </div>
+        <div class="info-section">
+            <p><strong>Folio:</strong> {{ folio }}</p>
+            <p><strong>Periodo:</strong> {{ periodo }}</p>
+            <p><strong>Fecha del Reporte:</strong> {{ fecha }}</p>
+            <p><strong>Motivo:</strong> {{ motivo }}</p>
+            {% if motivo == "Otros" %}
+                <p><strong>Otro Motivo:</strong> {{ otro_motivo }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="observaciones">
+        <p><strong>Observaciones:</strong> {{ observaciones }}</p>
+    </div>
+
+    <div class="justificado">
+        <p>
+            Sirva el presente para hacer de su conocimiento que su hijo(a) ha sido 
+            reportado por el Docente Tutor del grupo al que pertenece el alumno, debido a que se 
+            detectó que se encuentra incurriendo en la problemática arriba mencionada. 
+            Esta situación representa una conducta de riesgo que debe ser atendida de forma inmediata,
+            por lo que le solicitamos de la manera más atenta se ponga en contacto con 
+            la Subdirección del Plantel vía telefónica o personalmente, para brindarle mayor 
+            información sobre la situación académica del alumno, así como establecer acuerdos que nos 
+            permitan evitar un bajo desempeño académico e incluso el abandono escolar de su hijo(a).
+        </p>
+    </div>
+
+    <div class="firma">
+        <strong>Lic. Alberto López Martínez</strong>
+        Subdirector del Turno Matutino<br>
+        Plantel No. 17 “Constitución de 1917”
+    </div>
+
+    <button onclick="window.print()">🖨️ Imprimir Reporte</button>
+</div>
+
+</body>
+</html>

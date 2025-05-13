@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Justificante</title>
+</head>
+<body>
+    <h1>Editar Justificante</h1>
+    <form action="/editar_justificante/{{ justificante[0] }}" method="POST">
+        <label for="fecha_justificar">Fecha a Justificar:</label>
+        <input type="date" id="fecha_justificar" name="fecha_justificar" value="{{ justificante[2] }}" required><br>
+
+        <!-- Motivo: Si es "OTROS", mostrar motivo_otros -->
+        <label for="motivo">Motivo:</label>
+        <input type="text" id="motivo" name="motivo" 
+               value="{% if justificante[3] == 'OTROS' %}{{ justificante[5] }}{% else %}{{ justificante[3] }}{% endif %}" 
+               required><br>
+
+        <!-- Documentos: Si es "OTROS", mostrar documento_otros -->
+        <label for="documentos">Documentos:</label>
+        <input type="text" id="documentos" name="documentos" 
+               value="{% if justificante[4] == 'OTROS' %}{{ justificante[6] }}{% else %}{{ justificante[4] }}{% endif %}" 
+               required><br>
+
+        <label for="motivo_otros">Otro Motivo:</label>
+        <input type="text" id="motivo_otros" name="motivo_otros" value="{{ justificante[5] }}"><br>
+
+        <label for="documento_otros">Otro Documento:</label>
+        <input type="text" id="documento_otros" name="documento_otros" value="{{ justificante[6] }}"><br>
+
+        <button type="submit">Guardar Cambios</button>
+    </form>
+    <br>
+    <a href="/listar_justificantes">Cancelar</a>
+</body>
+</html>

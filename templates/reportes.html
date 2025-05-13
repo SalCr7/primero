@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario de Reporte de Estudiante</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"], textarea, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            color: #d9534f;
+            font-size: 18px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Formulario de Reporte de Estudiante</h1>
+    
+    {% if mensaje %}
+        <div class="message">{{ mensaje }}</div>
+    {% endif %}
+
+    <!-- Formulario para buscar matrícula -->
+    <form method="POST" action="">
+        <div class="form-group">
+            <label for="matricula">Matrícula:</label>
+            <input type="text" id="matricula" name="matricula" required value="{{ matricula }}">
+        </div>
+        <button type="submit" name="buscar_matricula" class="button">Buscar Estudiante</button>
+    </form>
+
+    {% if estudiante %}
+        <form method="POST" action="">
+            <input type="hidden" name="matricula" value="{{ estudiante[0] }}">
+            <h2>Datos del Estudiante</h2>
+            <p><strong>Nombre:</strong> {{ estudiante[1] }}</p>
+            <p><strong>Sexo:</strong> {{ estudiante[2] }}</p>
+            <p><strong>Dirección:</strong> {{ estudiante[4] }}</p>
+            <p><strong>Teléfono:</strong> {{ estudiante[9] }}</p>
+            <p><strong>Correo:</strong> {{ estudiante[11] }}</p>
+            
+            <div class="form-group">
+                <label for="grado">Grado:</label>
+                <input type="text" id="grado" name="grado" required>
+            </div>
+            <div class="form-group">
+                <label for="grupo">Grupo:</label>
+                <input type="text" id="grupo" name="grupo" required>
+            </div>
+            
+        <div class="form-group">
+            <label>Motivo:</label><br>
+            <strong>Faltas Leves:</strong><br>
+            <input type="checkbox" name="motivo[]" value="Falta de respeto"> Falta de respeto a otro miembro de la comunidad académica<br>
+            <input type="checkbox" name="motivo[]" value="Deshonestidad"> Cometer acción deshonesta contra un miembro de la comunidad<br>
+            <input type="checkbox" name="motivo[]" value="Desacato"> Desacatar indicaciones del personal docente o administrativo<br>
+            <input type="checkbox" name="motivo[]" value="Documentación falsa"> Proporcionar documentación apócrifa<br>
+            <input type="checkbox" name="motivo[]" value="Inasistencia"> No asistir a actos cívicos o académicos<br>
+            <input type="checkbox" name="motivo[]" value="Llegar tarde"> Llegar tarde a clases<br>
+            <input type="checkbox" name="motivo[]" value="Llegar tarde"> Organizar, promover y/o participar en cualquier tipo de manifestación de propaganda o proselitismo dentro de las instalaciones educativas o en su periferia<br>
+            <input type="checkbox" name="motivo[]" value="Llegar tarde"> Salir del aula de clases, laboratorio o espacio escolar, sin autorización expresa de la autoridad educativa<br>
+            <input type="checkbox" name="motivo[]" value="Llegar tarde"> Ingresar a espacios de trabajo del personal del Plantel sin autorización<br>
+            <input type="checkbox" name="motivo[]" value="Llegar tarde"> Dañar cualquier instalación, mobiliario o equipo del Plantel<br>
+            <input type="checkbox" name="motivo[]" value="Utilizar equipo electrico"> Utilizar cualquier equipo electrónico, celular, Smart watch o cualquier otro que pueda generar algún tipo de distractor dentro del horario de clases<br>
+            <input type="checkbox" name="motivo[]" value="Llegar tarde">  Ingerir alimentos o bebidas dentro del salón de clases sin autorización de la autoridad educativa correspondiente<br>
+            <input type="checkbox" name="motivo[]" value="Llegar tarde">  Utilizar juegos de azar, tales como baraja, dominó, cubilete, salvo que tengan fines formativos lúdicos y no afecten su tiempo de formación escolar<br>
+            <input type="checkbox" name="motivo[]" value="Llegar tarde">  Pegar o colocar publicidad y/o propaganda de cualquier tipo sin autorización.<br>
+            <input type="checkbox" name="motivo[]" value="Llegar tarde"> Publicar en redes sociales y/o aplicaciones virtuales; imágenes, videos y/o material que degraden la imagen del COBAQ o de la comunidad escolar en cualquier forma;<br>
+            <input type="checkbox" name="motivo[]" value="Llegar tarde"> Ejercer o participar en cualquier tipo de violencia ya sea de manera física, verbal o psicológica a cualquier integrante de la comunidad escolar.<br>
+            <br>
+            <strong>Faltas Graves:</strong><br>
+            <input type="checkbox" name="motivo[]" value="Violencia"> Ingerir, esnifar, fumar, usar, portar, poseer, distribuir o traficar cualquier tipo de droga, dentro del plantel y en su periferia, así como en actividades y eventos extra clase
+            <br>
+            <input type="checkbox" name="motivo[]" value="Alcohol">Provocar desórdenes que pongan en riesgo la integridad personal o la de los demás, en los espacios del COBAQ y fuera de ellos <br>
+            <input type="checkbox" name="motivo[]" value="Armas"> Introducir, poseer, distribuir o ingerir bebidas alcohólicas dentro del plantel; así como presentarse alcoholizado al mismo;<br>
+            <input type="checkbox" name="motivo[]" value="Fraude"> Obstaculizar e impedir el uso de las instalaciones o realizar cualquier tipo de acto que altere el funcionamiento del plantel;<br>
+            <input type="checkbox" name="motivo[]" value="Alcohol"> Apropiarse, sin ningún derecho ni autorización legal, de algún bien propiedad del COBAQ o de terceros<br>
+            <input type="checkbox" name="motivo[]" value="Alcohol"> Introducir, portar, poseer o traficar armas de fuego, instrumentos punzocortantes, artefactos explosivos, aerosoles, instrumentos generadores de fuego, o cualquier otro que se considere peligroso, prohibidos legalmente o puedan causar daño o lesiones a cualesquiera de los miembros de la comunidad escolar, o instalaciones del plantel;<br>
+            <input type="checkbox" name="motivo[]" value="Bullying"> Participar dentro de las instalaciones del COBAQ y/o zona periférica, en actividades de Bullying físico o psicológico, hostigamiento o acoso físico, psicológico, virtual y riñas;<br>
+            <input type="checkbox" name="motivo[]" value="Alcohol">Solicitar al personal del COBAQ ayuda indebida para obtener privilegios <br>
+            <input type="checkbox" name="motivo[]" value="Alcohol"> Ofrecer cualquier favor o beneficio al personal de COBAQ a cambio de lograr algún objetivo académico o privilegio;<br>
+            <input type="checkbox" name="motivo[]" value="Documentos apocrifos">Presentar documentos apócrifos, así como falsificar o alterar documentos emitidos por el COBAQ y hacer uso indebido de los mismos; <br>
+            <input type="checkbox" name="motivo[]" value="Falsificar">Falsificar, sustraer o alterar documentación oficial, así como realizar cualquier acto fraudulento con esta; <br>
+            <input type="checkbox" name="motivo[]" value="Suplantar"> Suplantar, ser suplantados, prestar ayuda indebida o valerse de acciones fraudulentas para acreditar su asistencia a clases o en la presentación de cualquier evaluación; acreditar su asistencia a clases o en la presentación de cualquier evaluación;<br>
+            <input type="checkbox" name="motivo[]" value="Alcohol">Detonar o introducir de manera clandestina al espacio educativo, cualquier tipo de material o sustancia flamable o explosiva <br>
+        </div>
+            <div class="form-group">
+                <label for="sancion">Tipo de Sanción:</label>
+                <select id="sancion" name="sancion">
+                    <option value="Ninguna">Ninguna</option>
+                    <option value="Amonestación">Amonestación</option>
+                    <option value="Suspensión">Suspensión</option>
+                    <option value="Expulsión">Expulsión</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="detalles">Detalles:</label>
+                <textarea id="detalles" name="detalles" rows="4"></textarea>
+            </div>
+            <button type="submit" name="guardar_reporte" class="button">Guardar Reporte</button>
+        </form>
+    {% endif %}
+</div>
+
+</body>
+</html>
